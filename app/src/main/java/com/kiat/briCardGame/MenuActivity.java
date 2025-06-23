@@ -10,19 +10,60 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import android.content.Intent;
+import android.view.View;
+import android.view.animation.OvershootInterpolator;
+import androidx.annotation.Nullable;
+import com.google.android.material.button.MaterialButton;
+
 public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_menu);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        MaterialButton btnSingle = findViewById(R.id.btnSingle);
+        MaterialButton btnMulti = findViewById(R.id.btnMulti);
+        MaterialButton btnSettings = findViewById(R.id.btnSettings);
+        MaterialButton btnLeaderboard = findViewById(R.id.btnLeaderboard);
+
+        // Анимация появления кнопок
+        animateButtonIn(btnSingle, 0);
+        animateButtonIn(btnMulti, 100);
+        animateButtonIn(btnSettings, 200);
+        animateButtonIn(btnLeaderboard, 300);
+
+        btnSingle.setOnClickListener(v -> {
+            // TODO: переход к одиночной игре
         });
+
+        btnMulti.setOnClickListener(v -> {
+            // TODO: переход к выбору сетевой игры
+        });
+
+        btnSettings.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        });
+
+        btnLeaderboard.setOnClickListener(v -> {
+            Intent intent = new Intent(this, LeaderActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    private void animateButtonIn(View view, int delay) {
+        view.setTranslationY(300);
+        view.setAlpha(0f);
+        view.animate()
+                .translationY(0)
+                .alpha(1f)
+                .setInterpolator(new OvershootInterpolator())
+                .setDuration(600)
+                .setStartDelay(delay)
+                .start();
     }
 }

@@ -37,7 +37,8 @@ public class MenuActivity extends AppCompatActivity {
         animateButtonIn(btnLeaderboard, 300);
 
         btnSingle.setOnClickListener(v -> {
-            // TODO: переход к одиночной игре
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
         });
 
         btnMulti.setOnClickListener(v -> {

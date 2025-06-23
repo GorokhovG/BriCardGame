@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BriCard Game</string>
+    <string name="card">Card</string>
 </resources>

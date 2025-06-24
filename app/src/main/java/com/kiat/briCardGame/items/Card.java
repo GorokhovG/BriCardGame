@@ -1,14 +1,14 @@
 package com.kiat.briCardGame.items;
 
 public class Card {
-    private final String imageResName; // e.g. "ace_of_clubs"
-    // You can add more fields for suit/rank if needed
-
-    public Card(String imageResName) {
+    public String imageResName;
+    public int rankValue;
+    public String suit;
+    public String rank;
+    public Card(String imageResName, int rankValue, String suit, String rank) {
         this.imageResName = imageResName;
-    }
-
-    public String getImageResName() {
-        return imageResName;
+        this.rankValue = rankValue;
+        this.suit = suit;
+        this.rank = rank;
     }
 }

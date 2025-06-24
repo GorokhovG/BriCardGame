@@ -5,8 +5,10 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -17,6 +19,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setStatusBarColor(ContextCompat.getColor(this, R.color.mainTop));
         setContentView(R.layout.activity_splash);
 
         // Можно запускать анимацию через LottieAnimationView, если надо программно
@@ -26,5 +29,12 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(new Intent(SplashActivity.this, MenuActivity.class));
             finish();
         }, SPLASH_DELAY);
+    }
+
+    public void setStatusBarColor(int color) {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(color);
     }
 }
